@@ -41,9 +41,6 @@ router.get('/:id', (req, res) => {
             })
         })
 })
-
-
-
 //Create a Post
 
 // | POST | /api/posts | Creates a post using the information sent inside the `request body`.

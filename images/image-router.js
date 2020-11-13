@@ -1,36 +1,35 @@
 const express = require('express');
 const router = express.Router();
 const dB = require('../data/dbConfig');
+const Images = require('./image-model');
 
-const Users = require('./image-model');
-const restricted = require('../auth/restricted-middleware');
-const bcrypt = require('bcryptjs');
+
 
 router.get('/', (req, res) => {
  
  Users.find()
-    .then(users => {
-        res.status(200).json(users)
+    .then(images => {
+        res.status(200).json(images)
     })
     .catch(err => {
         console.log(err);
         res.status(500).json({ 
-            errorMessage: "Error retrieving the list of users", 
+            errorMessage: "Error retrieving the list of images", 
             message: err.message
         })
     })
 })
 
-router.put('/:id', restricted, (req, res) => {
+router.put('/:id', (req, res) => {
       const id = req.params.id;
-      const userData = req.body; 
+      const imageData = req.body; 
       console.log(id);
-      console.log(userData);
+      console.log(imageData);
       Users.findById(id)
-      .then(u => {
-          console.log(u.id);
-          if(u.id == id) {
-              if(userData.password){
+      .then(image => {
+          console.log(image.id);
+          if(image.id == id) {
+              if(imageData.password){
                   const hash = bcrypt.hashSync(userData.password, 8);
                   userData.password = hash;
               }
