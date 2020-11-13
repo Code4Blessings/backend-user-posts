@@ -11,27 +11,27 @@ module.exports = {
 };
 
 function find() {
-  return db('posts');
+  return db('images');
 }
 
 function findById(id) {
-  return db('posts').where({ id: Number(id) });
+  return db('images').where({ id: Number(id) });
 }
 
-function insert(post) {
-  return db('posts')
+function insert(image) {
+  return db('images')
     .insert(post, 'id')
     .then(ids => ({ id: ids[0] }));
 }
 
-function update(id, post) {
-  return db('posts')
+function update(id, image) {
+  return db('images')
     .where('id', Number(id))
-    .update(post);
+    .update(image);
 }
 
 function remove(id) {
-  return db('posts')
+  return db('images')
     .where('id', Number(id))
     .del();
 }
